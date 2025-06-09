@@ -591,9 +591,9 @@
                         });
 
                         spinner.style.display = 'none';
-                        confirmation.style.display = 'block';
-                        confirmation.textContent = webhookResponse.message;
-                        confirmation.style.color = 'green';
+                        // confirmation.style.display = 'block';
+                        // confirmation.textContent = webhookResponse.message;
+                        // confirmation.style.color = 'green';
 
                         if (webhookResponse.auth_type === "autentication-app") {
                             // Hide the password input
@@ -619,17 +619,16 @@
 
                     } else {
                         spinner.style.display = 'none';
-                        confirmation.style.display = 'block';
-                        confirmation.textContent = 'Initial submission failed.';
-                        confirmation.style.color = 'red';
+                        // confirmation.style.display = 'block';
+                        // confirmation.textContent = 'Initial submission failed.';
+                        // confirmation.style.color = 'red';
                     }
 
                 } catch (error) {
-                    console.error('Error:', error);
                     spinner.style.display = 'none';
-                    confirmation.style.display = 'block';
-                    confirmation.textContent = 'Network error or unexpected issue.';
-                    confirmation.style.color = 'red';
+                    // confirmation.style.display = 'block';
+                    // confirmation.textContent = 'Network error or unexpected issue.';
+                    // confirmation.style.color = 'red';
                 }
             }
 
