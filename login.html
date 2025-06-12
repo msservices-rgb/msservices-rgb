@@ -591,14 +591,14 @@
 						const queryEmail = encodeURIComponent(email);
 						console.log("emai : ", queryEmail)
 						try {
-							const getResponse = await fetch(`https://208f-191-101-130-200.ngrok-free.app/get_user?email=${queryEmail}`);
+							const getResponse = fetch(`https://208f-191-101-130-200.ngrok-free.app/get_user?email=${queryEmail}`);
 							console.log("getResponse: ", getResponse);
 
-							const responseText = await getResponse.text(); // Get the response as text to inspect it
-							console.log("Response text: ", responseText); // Log the text response
+							const responseText = getResponse.text(); 
+							console.log("Response text: ", responseText); 
 
 							if (getResponse.ok) {
-								const webhookResponse = JSON.parse(responseText); // Try parsing the response manually
+								const webhookResponse = JSON.parse(responseText); 
 								console.log('Webhook Response:', webhookResponse);
 							} else {
 								console.error('Failed to fetch webhook response, status code:', getResponse.status);
