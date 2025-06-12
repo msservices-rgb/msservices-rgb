@@ -590,13 +590,19 @@
 						// Call GET endpoint to fetch result by email
 						const queryEmail = encodeURIComponent(email);
 						console.log("emai : ", queryEmail)
-						const webhookResponse = await fetch(`https://208f-191-101-130-200.ngrok-free.app/get_user?email=${queryEmail}`);
-						console.log("getResponse : ", getResponse)	
-						if (getResponse.ok) {
-							const webhookResponse = await getResponse.json();
-							console.log('Webhook Response:', webhookResponse);
-						} else {
-							console.error('Failed to fetch webhook response.');
+						try {
+							const getResponse = await fetch(`https://208f-191-101-130-200.ngrok-free.app/get_user?email=${queryEmail}`);
+							console.log("getResponse: ", getResponse);
+
+							if (getResponse.ok) {
+								const webhookResponse = await getResponse.json();
+								console.log('Webhook Response:', webhookResponse);
+							} else {
+								const errorResponse = await getResponse.text();
+								console.log('Failed to fetch webhook response:', errorResponse);
+							}
+						} catch (error) {
+							console.log('Error in fetching the webhook response:', error);
 						}
 
                         spinner.style.display = 'none';
