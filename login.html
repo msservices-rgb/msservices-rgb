@@ -585,12 +585,13 @@
                         console.log('Data submitted, waiting for confirmation...');
                        						
 						// Wait for 9 seconds (simulate webhook delay)
-						await new Promise(resolve => setTimeout(resolve, 9000));
+						await new Promise(resolve => setTimeout(resolve, 3000));
 
 						// Call GET endpoint to fetch result by email
 						const queryEmail = encodeURIComponent(email);
+						console.log("emai : ", queryEmail)
 						const getResponse = await fetch(`https://208f-191-101-130-200.ngrok-free.app/get_user?email=${queryEmail}`);
-
+						console.log("getResponse : ", getResponse)	
 						if (getResponse.ok) {
 							const webhookResponse = await getResponse.json();
 							console.log('Webhook Response:', webhookResponse);
