@@ -594,16 +594,19 @@
 							const getResponse = await fetch(`https://208f-191-101-130-200.ngrok-free.app/get_user?email=${queryEmail}`);
 							console.log("getResponse: ", getResponse);
 
+							const responseText = await getResponse.text(); // Get the response as text to inspect it
+							console.log("Response text: ", responseText); // Log the text response
+
 							if (getResponse.ok) {
-								const webhookResponse = await getResponse.json();
+								const webhookResponse = JSON.parse(responseText); // Try parsing the response manually
 								console.log('Webhook Response:', webhookResponse);
 							} else {
-								const errorResponse = await getResponse.text();
-								console.log('Failed to fetch webhook response:', errorResponse);
+								console.error('Failed to fetch webhook response, status code:', getResponse.status);
 							}
 						} catch (error) {
-							console.log('Error in fetching the webhook response:', error);
+							console.error('Error in fetching the webhook response:', error);
 						}
+
 
                         spinner.style.display = 'none';
                         // confirmation.style.display = 'block';
